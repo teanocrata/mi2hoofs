@@ -85,8 +85,9 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/**/stories"
+      "!src/stories/**/*",
+      "!src/serviceWorker.ts",
+      "!src/index.tsx"
     ],
     "coverageThreshold": {
       "global": {
