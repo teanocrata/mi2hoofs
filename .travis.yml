@@ -8,12 +8,11 @@ install:
   - yarn install
 script:
   - yarn test --coverage
-  - yarn build
   - yarn build-storybook
+  - yarn build
 after_success:
   - yarn release
-  - git remote show origin
-  - git push https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG.git --follow-tags origin master    
+  - git push --follow-tags origin master    
 deploy:
   provider: pages
   skip_cleanup: true
