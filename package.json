@@ -33,7 +33,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "git-cz": "git-cz"
+    "git-cz": "git-cz",
+    "release": "HUSKY_SKIP_HOOKS=1 standard-version"
   },
   "eslintConfig": {
     "extends": [
@@ -67,7 +68,8 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "source-map-explorer": "^2.4.2"
+    "source-map-explorer": "^2.4.2",
+    "standard-version": "^8.0.2"
   },
   "husky": {
     "hooks": {
