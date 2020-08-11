@@ -7,7 +7,7 @@ cache:
 install:
   - yarn install
 script:
-  - yarn test
+  - yarn test --coverage
   - yarn build-storybook
 deploy:
   provider: script
