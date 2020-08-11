@@ -10,7 +10,7 @@ script:
   - yarn test
   - yarn build-storybook
 deploy:
-  - provider: script
-      script: yarn deploy
-      on:
-        branch: master
+  provider: script
+  script: yarn deploy
+  on:
+    branch: develop
