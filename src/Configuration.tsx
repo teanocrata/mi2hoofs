@@ -41,20 +41,24 @@ export default class Configuration extends React.Component {
     (this.bluetoothAvailable = available);
 
   componentDidMount() {
-    navigator.bluetooth.getAvailability().then((isBluetoothAvailable) => {
-      console.log(
-        `> Bluetooth is ${isBluetoothAvailable ? "available" : "unavailable"}`
-      );
-      this.updateBluetoothAvailability(isBluetoothAvailable);
-    });
-
-    if ("onavailabilitychanged" in navigator.bluetooth) {
-      navigator.bluetooth.addEventListener("availabilitychanged", (event) => {
+    if ("bluetooth" in navigator) {
+      navigator.bluetooth.getAvailability().then((isBluetoothAvailable) => {
         console.log(
-          `> Bluetooth is ${(event as any).value ? "available" : "unavailable"}`
+          `> Bluetooth is ${isBluetoothAvailable ? "available" : "unavailable"}`
         );
-        this.updateBluetoothAvailability((event as any).value);
+        this.updateBluetoothAvailability(isBluetoothAvailable);
       });
+
+      if ("onavailabilitychanged" in navigator.bluetooth) {
+        navigator.bluetooth.addEventListener("availabilitychanged", (event) => {
+          console.log(
+            `> Bluetooth is ${
+              (event as any).value ? "available" : "unavailable"
+            }`
+          );
+          this.updateBluetoothAvailability((event as any).value);
+        });
+      }
     }
   }
 
