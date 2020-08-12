@@ -1,12 +1,13 @@
 import React, { ReactElement } from "react";
 
 import { observer } from "mobx-react";
-import { observable, ObservableMap, runInAction } from "mobx";
+import { observable, ObservableMap, runInAction, action } from "mobx";
 
-import { Button, Icon } from "@blueprintjs/core";
+import { Button, Icon, NonIdealState } from "@blueprintjs/core";
 
 import DeviceCard from "./DeviceCard";
 import { MiBluetoothDevice } from "./MiBluetoothDevice";
+
 import css from "./Configuration.module.css";
 
 @observer
@@ -15,6 +16,8 @@ export default class Configuration extends React.Component {
     string,
     MiBluetoothDevice
   > = new ObservableMap();
+
+  @observable bluetoothAvailable: boolean = false;
 
   addDevice = () => {
     navigator.bluetooth
@@ -34,6 +37,27 @@ export default class Configuration extends React.Component {
       });
   };
 
+  @action updateBluetoothAvailability = (available: boolean) =>
+    (this.bluetoothAvailable = available);
+
+  componentDidMount() {
+    navigator.bluetooth.getAvailability().then((isBluetoothAvailable) => {
+      console.log(
+        `> Bluetooth is ${isBluetoothAvailable ? "available" : "unavailable"}`
+      );
+      this.updateBluetoothAvailability(isBluetoothAvailable);
+    });
+
+    if ("onavailabilitychanged" in navigator.bluetooth) {
+      navigator.bluetooth.addEventListener("availabilitychanged", (event) => {
+        console.log(
+          `> Bluetooth is ${(event as any).value ? "available" : "unavailable"}`
+        );
+        this.updateBluetoothAvailability((event as any).value);
+      });
+    }
+  }
+
   render() {
     const devices: Array<ReactElement> = [];
     this.devices.forEach((device) => {
@@ -45,9 +69,18 @@ export default class Configuration extends React.Component {
     return (
       <div className={css.configuration}>
         <div className={css.devices}>{devices}</div>
-        <Button className={css.addButton} fill minimal onClick={this.addDevice}>
-          <Icon icon="add" iconSize={100} intent="primary" />
-        </Button>
+        {this.bluetoothAvailable ? (
+          <Button
+            className={css.addButton}
+            fill
+            minimal
+            onClick={this.addDevice}
+          >
+            <Icon icon="add" iconSize={100} intent="primary" />
+          </Button>
+        ) : (
+          <NonIdealState icon="offline" title="Bluetooth is not available" />
+        )}
       </div>
     );
   }
