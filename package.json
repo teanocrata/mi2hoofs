@@ -1,8 +1,8 @@
 {
-  "name": "mi2hoofs",
+  "name": "bluehoofs",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://teanocrata.github.io/mi2hoofs",
+  "homepage": "https://teanocrata.github.io/bluehoofs",
   "dependencies": {
     "@blueprintjs/core": "^3.30.1",
     "@types/node": "^12.0.0",

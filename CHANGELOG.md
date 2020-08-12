@@ -4,7 +4,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## 0.1.0 (2020-08-11)
 
-
 ### Features
 
-* first working PWA ([d3f55cc](https://github.com/teanocrata/mi2hoofs/commit/d3f55cc083fe976ec519d5df6a4222f2972c6133))
+- first working PWA ([d3f55cc](https://github.com/teanocrata/bluehoofs/commit/d3f55cc083fe976ec519d5df6a4222f2972c6133))
