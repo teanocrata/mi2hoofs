@@ -2,8 +2,8 @@ import React from "react";
 import { render } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("renders nav bar with blue hoofs heading", () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const blueHoofsText = getByText(/blue hoofs/i);
+  expect(blueHoofsText).toBeInTheDocument();
 });
